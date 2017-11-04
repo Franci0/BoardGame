@@ -35,8 +35,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4534075220846330}
   - component: {fileID: 33268809128887214}
-  - component: {fileID: 135549781267796926}
   - component: {fileID: 23576319894714090}
+  - component: {fileID: 64330474960226140}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -50,8 +50,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1559418673906738}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 0.25, z: 0.75}
   m_Children:
   - {fileID: 4534075220846330}
@@ -110,8 +110,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1923330756899620}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!135 &135549781267796926
-SphereCollider:
+--- !u!64 &64330474960226140
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -120,5 +120,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}

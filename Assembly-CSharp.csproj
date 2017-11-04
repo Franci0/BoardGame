@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\DiceRoller.cs" />
+     <Compile Include="Assets\Scripts\DiceTotalDisplay.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>F:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
