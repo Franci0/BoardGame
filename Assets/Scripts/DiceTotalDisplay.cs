@@ -14,7 +14,7 @@ public class DiceTotalDisplay : MonoBehaviour
 
 	void Update ()
 	{
-		if (theDiceRoller.doneRolling) {
+		if (theDiceRoller.isDoneRolling) {
 			GetComponent<Text> ().text = "= " + theDiceRoller.diceTotal;
 		} else {
 			GetComponent<Text> ().text = "= ?";

@@ -10,7 +10,7 @@ public class DiceRoller : MonoBehaviour
 	public Sprite[] diceImageZero;
 	public int[] diceValues;
 	public int diceTotal;
-	public bool doneRolling = false;
+	public bool isDoneRolling = false;
 
 	void Start ()
 	{
@@ -35,13 +35,13 @@ public class DiceRoller : MonoBehaviour
 				transform.GetChild (i).GetComponent<Image> ().sprite = diceImageOne [Random.Range (0, diceImageOne.Length)];
 			}
 		}
-		doneRolling = true;
+		isDoneRolling = true;
 
 		//Debug.Log ("Rolled " + diceTotal);
 	}
 
 	public void NewTurn ()
 	{
-		doneRolling = false;
+		isDoneRolling = false;
 	}
 }
