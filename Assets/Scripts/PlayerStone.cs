@@ -6,26 +6,31 @@ public class PlayerStone : MonoBehaviour
 {
 	public Tile startingTile;
 
-	DiceRoller theDiceRoller;
-	Tile currentTile;
-	Vector3 targetPosition;
-	Vector3 velocity = Vector3.zero;
 	float smoothTime = 0.25f;
 	float smoothTimeVertical = 0.1f;
 	float smoothDistance = 0.01f;
 	float smoothHeight = 0.5f;
-	Tile[] moveQueue;
 	int moveQueueIndex;
 	bool scoreMe = false;
+	bool isAnimating = false;
+	Tile[] moveQueue;
+	Tile currentTile;
+	Vector3 targetPosition;
+	Vector3 velocity = Vector3.zero;
+	StateManager stateManager;
 
 	void Start ()
 	{
-		theDiceRoller = GameObject.FindObjectOfType<DiceRoller> ();
 		targetPosition = transform.position;
+		stateManager = FindObjectOfType<StateManager> ();
 	}
 
 	void Update ()
 	{
+		if (!isAnimating) {
+			return;
+		}
+
 		if (Vector3.Distance (
 			    new Vector3 (transform.position.x, targetPosition.y, transform.position.z), 
 			    targetPosition) < smoothDistance) {
@@ -63,6 +68,9 @@ public class PlayerStone : MonoBehaviour
 				SetNewTargetPosition (nextTile.transform.position);
 				moveQueueIndex++;
 			}
+		} else {
+			isAnimating = false;
+			stateManager.isDoneAnimating = true;
 		}
 	}
 
@@ -74,27 +82,31 @@ public class PlayerStone : MonoBehaviour
 
 	void OnMouseUp ()
 	{
-		
 		Debug.Log ("Click!");
 
-		if (!theDiceRoller.isDoneRolling) {
+		if (!stateManager.isDoneRolling) {
 			return;
 		}
 
-		int spaceToMove = theDiceRoller.diceTotal;
+		if (stateManager.isDoneClicking) {
+			return;
+		}
+
+		int spaceToMove = stateManager.diceTotal;
+
 		if (spaceToMove == 0) {
 			return;
 		}
+
 		moveQueue = new Tile[spaceToMove];
 		Tile finalTile = currentTile;
 
 		for (int i = 0; i < spaceToMove; i++) {
+			
 			if (finalTile == null && !scoreMe) {
 				finalTile = startingTile;
 			} else {
 				if (finalTile.nextTiles == null || finalTile.nextTiles.Length == 0) {
-					//Destroy (gameObject);
-					//return;
 					scoreMe = true;
 					finalTile = null;
 				} else if (finalTile.nextTiles.Length > 1) {
@@ -103,10 +115,14 @@ public class PlayerStone : MonoBehaviour
 					finalTile = finalTile.nextTiles [0];
 				}
 			}
+
 			moveQueue [i] = finalTile;
 		}
+
 		moveQueueIndex = 0;
 		currentTile = finalTile;
+		stateManager.isDoneClicking = true;
+		isAnimating = true;
 	}
 
 }

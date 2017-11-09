@@ -9,12 +9,13 @@ public class DiceRoller : MonoBehaviour
 	public Sprite[] diceImageOne;
 	public Sprite[] diceImageZero;
 	public int[] diceValues;
-	public int diceTotal;
-	public bool isDoneRolling = false;
+
+	StateManager stateManager;
 
 	void Start ()
 	{
 		diceValues = new int[4];
+		stateManager = FindObjectOfType<StateManager> ();
 	}
 
 	void Update ()
@@ -24,10 +25,14 @@ public class DiceRoller : MonoBehaviour
 
 	public void RollTheDice ()
 	{
-		diceTotal = 0;
+		if (stateManager.isDoneRolling) {
+			return;
+		}
+
+		stateManager.diceTotal = 0;
 		for (int i = 0; i < diceValues.Length; i++) {
 			diceValues [i] = Random.Range (0, 2);
-			diceTotal += diceValues [i];
+			stateManager.diceTotal += diceValues [i];
 
 			if (diceValues [i] == 0) {
 				transform.GetChild (i).GetComponent<Image> ().sprite = diceImageZero [Random.Range (0, diceImageZero.Length)];
@@ -35,13 +40,8 @@ public class DiceRoller : MonoBehaviour
 				transform.GetChild (i).GetComponent<Image> ().sprite = diceImageOne [Random.Range (0, diceImageOne.Length)];
 			}
 		}
-		isDoneRolling = true;
+		stateManager.isDoneRolling = true;
 
 		//Debug.Log ("Rolled " + diceTotal);
-	}
-
-	public void NewTurn ()
-	{
-		isDoneRolling = false;
 	}
 }

@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\DiceRoller.cs" />
      <Compile Include="Assets\Scripts\DiceTotalDisplay.cs" />
      <Compile Include="Assets\Scripts\PlayerStone.cs" />
+     <Compile Include="Assets\Scripts\StateManager.cs" />
      <Compile Include="Assets\Scripts\Tile.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>F:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
